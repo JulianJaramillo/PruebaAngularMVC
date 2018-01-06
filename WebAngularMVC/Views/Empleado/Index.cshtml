@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/AngularCode.js"></script>
+<style>
+    .btn-space {
+        margin-left: -5%;
+        background-color: cornflowerblue;
+        font-size: large;
+    }
+</style>
+<h2>Lista de Empleados</h2>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+        <table cellpadding="12" class="table table-bordered table-hover">
+            <tr>
+                <td>
+                    <b>IdEmpleado</b>
+                </td>
+                <td>
+                    <b>Nombre</b>
+                </td>
+                <td>
+                    <b>Apellido</b>
+                </td>
+                <td>
+                    <b>Tarea</b>
+                </td>
+                <td>
+                    <b>Email</b>
+                </td>
+                <td>
+                    <b>Telefono</b>
+                </td>
+                <td>
+                    <b>Acciones</b>
+                </td>
+            </tr>
+            <tr ng-repeat="Emp in empleadoes">
+                <td>
+                    {{Emp.IdEmpleado}}
+                </td>
+                <td>
+                    {{Emp.NombreEmpleado}}
+                </td>
+                <td>
+                    {{Emp.ApellidoEmpleado}}
+                </td>
+                <td>
+                    {{Emp.DescripcionTarea}}
+                </td>
+                <td>
+                    {{Emp.Email}}
+                </td>
+                <td>
+                    {{Emp.Telefono}}
+                </td>
+                <td>
+                    <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateEmp(Emp)" />
+                    <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteEmp(Emp)" />
+                </td>
+            </tr>
+        </table>
+        <div class="form-horizontal" role="form">
+            <div class="container">
+                <div class="row">
+                    <h2>
+                        <span id="spn">Adicionar Nuevo Empleado</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Nombre:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" ng-model="EmpNombre" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Apellido:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputApellido" placeholder="Apellido" ng-model="EmpApellido">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Tarea:</label>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" id="inputTarea" required placeholder="Tarea" ng-model="EmpTarea">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Email:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputEmail" required placeholder="Email" ng-model="EmpEmail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Telefono:</label>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" id="inputTelefono"  required placeholder="Telefono" ng-model="EmpTelefono" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <input type="button" id="btnSave" class="form-control btn-primary"  required value="Submit" ng-click="InsertData()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal" role="form">
+            <div class="container">
+                <div class="row">
+                    <h2>
+                        <span id="spn">Adicionar Nueva Tarea</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Tarea:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputDecripcionTarea" placeholder="Tarea" ng-model="EmpDescripcionTarea">
+                            </div>
+                            <label class="col-md-4 control-label">Estimacion:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputEstimacionTarea" placeholder="Estimacion" ng-model="EmpEstimacionTarea">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <input type="button" id="btnSaveTarea" class="form-control btn-primary" value="GuardarTarea" ng-click="InsertDataTarea()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("EmpID_")
+
+</div>
